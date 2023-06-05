@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,13 +16,18 @@ function App() {
     setBooks([...books, book]);
   }
 
-  function onBookEdit(book) {
-    setBookToEdit(book);
-    onBookDelete(book);
-  }
-
   function onBookDelete(book) {
     setBooks(books.filter((x) => x.isbn != book.isbn));
+  }
+
+  function onBookEdit(book) {
+    console.log("editing books");
+    setBookToEdit(book);
+    console.log("editing books 2");
+
+    setBooks(books.filter((x) => x.isbn != book.isbn));
+    console.log("editing books 3");
+
   }
 
   return (

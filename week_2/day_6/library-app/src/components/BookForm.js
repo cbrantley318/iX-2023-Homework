@@ -7,6 +7,7 @@ export default function BookForm(props) {
   const [isbn, setIsbn] = useState("");
 
   useEffect(() => {
+    console.log(props.bookToEdit);
     if (props.bookToEdit) {
       setTitle(props.bookToEdit.title);
       setAuthor(props.bookToEdit.author);
@@ -17,16 +18,20 @@ export default function BookForm(props) {
   function onFormSubmit(e) {
     e.preventDefault();
 
-    if (title == null || author == null || isbn == null) {
+    console.log("First bit");
+    console.log(title);
+
+    if (title == "" || author == "" || isbn == "") {
       return;
     }
+    console.log("Got here!");
 
-    let book = new Book(author, title, isbn);
+    let book = new Book(title, author, isbn);
 
     props.onBookCreate(book);
-    setTitle(null);
-    setAuthor(null);
-    setIsbn(null);
+    setTitle("");
+    setAuthor("");
+    setIsbn("");
     return;
   }
 
@@ -35,18 +40,28 @@ export default function BookForm(props) {
       <h1>Library Database</h1>
       <form className="mx-5 my-3" onSubmit={onFormSubmit}>
         <label>Enter Book Name:</label>
-        <input type="text" className="form-control" placeholder="Title"></input>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        ></input>
         <label>Enter Author Name:</label>
         <input
           type="text"
           className="form-control"
           placeholder="Author"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
         ></input>
         <label>Enter ISBN:</label>
         <input
           type="number"
           className="form-control"
           placeholder="ISBN"
+          value={isbn}
+          onChange={(e) => setIsbn(e.target.value)}
         ></input>
         <button type="submit" className="btn btn-primary m-3">
           Add Book

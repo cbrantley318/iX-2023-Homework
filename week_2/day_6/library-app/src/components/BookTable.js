@@ -15,19 +15,19 @@ export default function BookTable(props) {
         <tbody>
           {props.books.map((book) => {
             return (
-              <tr>
+              <tr key ={book.isbn}>
                 <td>{book.title}</td>
                 <td>{book.author}</td>
                 <td>{book.isbn}</td>
                 <td>
                   <button
-                    onClick={props.onBookEdit(book)}
-                    className="btn btn-warnin btn-sm"
+                    onClick={() => props.onBookEdit(book)}
+                    className="btn btn-warning btn-sm"
                   >
                     Edit
                   </button>
                   <button
-                    onClick={props.onBookDelete(book)}
+                    onClick={() => props.onBookDelete(book)}
                     className="btn btn-danger btn-sm"
                   >
                     Delete
